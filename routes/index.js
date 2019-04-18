@@ -13,14 +13,25 @@ router.get('/', function(req, res, next) {
 // Users
 
 // GET Users
+// Return a JSON array object with all users
 router.get('/users', (req, res) => {
-	console.log(testDB.getUsers());
-	res.render('index', {title: 'Users'});
+	testDB.getUsers((error, users) => {
+		if (error) {
+			return res.send(error);
+		}
+		res.send(users);
+	});
 });
 
 // GET User
+// Return a JSON user object
 router.get('/users/:username', (req, res) => {
-
+	testDB.getUser(req.params.username, (error, user) => {
+		if (error) {
+			return res.send(error);
+		}
+		res.send(user);
+	});
 });
 
 // POST User
@@ -47,21 +58,33 @@ router.post('/users/login', (req, res) => {
 // Tags
 
 // GET Tags
+// Return a JSON array object with all tags
 router.get('/tags', (req, res) => {
-
+	testDB.getTags((error, tags) => {
+		if (error) {
+			return res.send(error);
+		}
+		res.send(tags);
+	});
 });
 
 
 // Questions
 
 // GET Questions
+// Return a JSON array object with all questions
 router.get('/questions', (req, res) => {
-
+	testDB.getQuestions((error, questions) => {
+		if (error) {
+			return res.send(error);
+		}
+		res.send(questions);
+	});
 });
 
 // GET Question
 router.get('/questions/:idQuestion', (req, res) => {
-
+	
 });
 
 // POST Question
